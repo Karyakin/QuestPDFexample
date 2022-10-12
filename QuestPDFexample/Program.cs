@@ -13,6 +13,7 @@ string txt = "Hello PDF";
 var textStyleWithFallback = TextStyle
     .Default
     .FontFamily(Fonts.Calibri)
+    .SemiBold()
     .FontSize(8)
     
         .Fallback(y => y
@@ -27,16 +28,16 @@ Document.Create(document =>
     {
         page.DefaultTextStyle(textStyleWithFallback);
         page.Size(PageSizes.A4.Landscape());
-        page.Margin(5);
+        page.Margin(1);
 
         
-        /*page.Header()
-            .Border(2)
+        page.Header()
+            //.Border(2)
             .Height(60)
-            .Background(Colors.Grey.Lighten1)
+            .Background(Colors.Green.Lighten2)
             .AlignCenter()
             .AlignMiddle()
-            .Text("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");*/
+            .Text("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
 
         page.Content()
             .DefaultTextStyle(textStyleWithFallback)
@@ -51,28 +52,26 @@ Document.Create(document =>
                         .Border(1)
                         .BorderColor(Colors.Grey.Lighten1)
                         .Background(backgroundColor)
-                        .PaddingVertical(1)
-                        .PaddingHorizontal(10)
+                        .PaddingHorizontal(1)
                         .AlignCenter()
                         .AlignMiddle();
                 }
                 table.ColumnsDefinition(columns =>
                 {
-                    columns.ConstantColumn(85);
-                    columns.ConstantColumn(100);
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-        
+                    columns.ConstantColumn(70);
+                    columns.ConstantColumn(105);
+                    columns.ConstantColumn(43);
+                    columns.ConstantColumn(43);
+                    columns.ConstantColumn(75);
+                    columns.ConstantColumn(75);
+                    columns.ConstantColumn(65);
+                    columns.ConstantColumn(65);
+                    columns.ConstantColumn(33);
+                    columns.ConstantColumn(40);
+                    
                     columns.ConstantColumn(60);
                     columns.ConstantColumn(60);
-        
-                    columns.ConstantColumn(60);
+                    columns.ConstantColumn(45);
                     columns.ConstantColumn(60);
                 });
               
@@ -86,7 +85,7 @@ Document.Create(document =>
                 table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().AlignCenter().Text("Продавец");
                 table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().AlignCenter().Text("Покупатель");
                 table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().AlignCenter().Text("Валюта платежа");
-                table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма биржевой сделки (с учетом НДС");
+                table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма биржевой сделки\n(с учетом НДС)");
             
                 table.Cell().ColumnSpan(4).Element(CellStyle).AlignCenter().Text("Плата за организацию и проведение биржевых торгов\n (биржевой сбор)");
                 table.Cell().Element(CellStyle).AlignCenter().Text("Ставка биржевого сбора, %");
