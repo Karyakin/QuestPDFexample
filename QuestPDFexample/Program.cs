@@ -6,14 +6,14 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using QuestPDF.Previewer;
 
-var pageSizes = new List<(string o1, string o2, string o3, string o4, string o5, string o6, string o7, string o8, string o9, string o10, string o11, string o12, string o13, string o14 )>()
+var pageContent = new List<(string o1, string o2, string o3, string o4, string o5, string o6, string o7, string o8, string o9, string o10, string o11, string o12, string o13, string o14 )>()
 {
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),         
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),        
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
-    ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
+    ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOОплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
@@ -24,8 +24,6 @@ var pageSizes = new List<(string o1, string o2, string o3, string o4, string o5,
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     
 };
-
-string txt = "Hello PDF";
 
 var textStyleWithFallback = TextStyle
     .Default
@@ -48,18 +46,45 @@ Document.Create(document =>
         page.Margin(1);
 
         
-        page.Header().Padding(2)
-            .Height(60)
-            .Background(Colors.Green.Lighten2)
+        page.Header()
             .AlignCenter()
-            .AlignMiddle()
-            .Text("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
+            .ShowOnce()
+            .Decoration(decoration =>
+            {
+                decoration
+                    .Content()
+                    .AlignCenter()
+                    .Row(row =>
+                    {
+                        row.ConstantItem(40)
+                            .Padding(5)
+                            .Image("C:/Users/d.karyakin/RiderProjects/QuestPDFexample/QuestPDFexample/apple-touch-icon.png");
+                    });
+                /*decoration
+                    .Content()
+                    .AlignCenter()
+                   .Text(text =>
+                    {
+                        text.DefaultTextStyle(x => x.SemiBold()
+                            .FontSize(15)
+                            .FontColor(Colors.Black));
+                        text.Span("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
+                    });*/
+                decoration
+                    .After()
+                    .Text(text =>
+                    {
+                        text.DefaultTextStyle(x => x.SemiBold()
+                            .FontSize(15)
+                            .FontColor(Colors.Black));
+                        text.Span("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
+                    });
+            });
 
         page.Content()
             .DefaultTextStyle(textStyleWithFallback)
             //.Border(1)
-           
-
+            .PaddingTop(20)
             .Table(table =>
             {
                 IContainer DefaultCellStyle(IContainer container, string backgroundColor)
@@ -111,22 +136,22 @@ Document.Create(document =>
                 IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
 
 
-                foreach (var VARIABLE in pageSizes)
+                foreach (var content in pageContent)
                 {
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o1).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o2).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o3).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o4).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o5).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o6).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o7).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o8).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o9).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o10).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o11).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o12).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o13).NormalWeight();
-                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(VARIABLE.o14).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o1).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).Text(content.o2).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o3).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o4).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).Text(content.o5).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).Text(content.o6).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o7).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o8).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o9).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o10).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o11).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o12).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o13).NormalWeight();
+                    table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o14).NormalWeight();
                 }
                 
                 
@@ -135,9 +160,9 @@ Document.Create(document =>
             
 
         page.Footer()
-            .Height(1, Unit.Inch)
+            .Height(1, Unit.Centimetre)
             .AlignCenter()
-            .AlignBottom()
+            .AlignMiddle()
             .Text(text =>
             {
                 text.DefaultTextStyle(x=>x.FontSize(10));
@@ -146,7 +171,7 @@ Document.Create(document =>
                 text.Span(" из ").FontColor(Colors.Red.Darken4);
                 text.TotalPages().FontSize(10);
             });
-});
+    });
 }).ShowInPreviewer();
 
 static IContainer Block(IContainer container)
