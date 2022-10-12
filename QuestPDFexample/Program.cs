@@ -60,16 +60,7 @@ Document.Create(document =>
                             .Padding(5)
                             .Image("C:/Users/d.karyakin/RiderProjects/QuestPDFexample/QuestPDFexample/apple-touch-icon.png");
                     });
-                /*decoration
-                    .Content()
-                    .AlignCenter()
-                   .Text(text =>
-                    {
-                        text.DefaultTextStyle(x => x.SemiBold()
-                            .FontSize(15)
-                            .FontColor(Colors.Black));
-                        text.Span("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
-                    });*/
+             
                 decoration
                     .After()
                     .Text(text =>
@@ -82,7 +73,133 @@ Document.Create(document =>
             });
 
         page.Content()
-            .DefaultTextStyle(textStyleWithFallback)
+            .PaddingTop(10)
+            .Grid(grid =>
+            {
+               
+                grid.AlignCenter();
+                grid.Columns(10); // 12 by default
+
+                grid.Item(10).Text("Получатель: ОАО «Белорусская универсальная товарная биржа», УНП 190542056\nСчет №: BY23AKBB30120000059140000000, банк получателя: ОАО «АСБ Беларусбанк», пр. Дзержинского, 18, БИК AKBBBY2X");
+
+                grid.Item(10).PaddingTop(20).PaddingBottom(20).Table(table =>
+                {
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                      
+                        table.Cell().PaddingLeft(10).Text("Секция 03");
+                        table.Cell().AlignCenter().Text("РЕЕСТР СДЕЛОК УЧАСТНИКА БИРЖЕВОЙ ТОРГОВЛИ");
+                        table.Cell().AlignRight().PaddingRight(10).Text("116768");
+                    });
+                });
+                
+                grid.Item(10).Text("ООО \"АВАБИ\". Адрес РЕСПУБЛИКА БЕЛАРУСЬ, 220005, г. Минск, ул. Платонова дом 20Б корпус 3 квартира/офис 148. УНП (ЕГРН) 100172248. Договор на биржевое обслуживание биржевого брокера №454 от 10.12.2021, Договор на биржевое обслуживание посетителя торгов №401 от 01.09.2021")
+                    .Underline()
+                    ;
+
+                
+                grid.Item(10).PaddingTop(20).PaddingBottom(20).Table(table =>
+                {
+                    IContainer DefaultCellStyle(IContainer container, string backgroundColor)
+                    {
+                        return container
+                            .Border(1)
+                            .BorderColor(Colors.Grey.Lighten1)
+                            .Background(backgroundColor)
+                            .PaddingHorizontal(1)
+                            .AlignCenter()
+                            .AlignMiddle();
+                    }
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.ConstantColumn(70);
+                        columns.ConstantColumn(105);
+                        columns.ConstantColumn(43);
+                        columns.ConstantColumn(43);
+                        columns.ConstantColumn(75);
+                        columns.ConstantColumn(75);
+                        columns.ConstantColumn(65);
+                        columns.ConstantColumn(65);
+                        columns.ConstantColumn(33);
+                        columns.ConstantColumn(40);
+                        
+                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(45);
+                        columns.ConstantColumn(60);
+                      
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Биржевая сделка (регистрационный номер)");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Единица измерения");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Количество товара");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия оплаты");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия поставки");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Продавец");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Покупатель");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Валюта платежа");
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма биржевой сделки\n(с учетом НДС)");
+                        IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
+                      
+                        table.Cell().ColumnSpan(4).Element(CellStyleForHeader).AlignCenter().Text("Плата за организацию и проведение биржевых торгов\n (биржевой сбор)");
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Ставка биржевого сбора, %");
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора без НДС");
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма НДС");
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора с НДС");
+                        foreach (var content in pageContent)
+                        {
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o1).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).Text(content.o2).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o3).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o4).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).Text(content.o5).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).Text(content.o6).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o7).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o8).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o9).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o10).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o11).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o12).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o13).NormalWeight();
+                            table.Cell().Element(CellStyleForTable).ShowEntire().Text(content.o14).NormalWeight();
+                        }
+                
+                
+                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
+                        
+                    });
+                });
+                
+                /*grid.Item(12).Table(table =>
+                {
+                    
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        
+                        table.Cell().ExtendHorizontal().AlignLeft().AlignCenter().Text("Биржевая сделка (регистрационный номер)");
+                        table.Cell().ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара");
+                    });
+                });*/
+                
+                
+                
+                //grid.Item(10).AlignCenter().PaddingTop(10).PaddingBottom(10).Text("РЕЕСТР СДЕЛОК УЧАСТНИКА БИРЖЕВОЙ ТОРГОВЛИ");
+                
+                
+            
+                
+               
+                
+              
+            });
+
+            
+            
+            /*.DefaultTextStyle(textStyleWithFallback)
             //.Border(1)
             .PaddingTop(20)
             .Table(table =>
@@ -156,7 +273,7 @@ Document.Create(document =>
                 
                 
                 IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
-            });
+            });*/
             
 
         page.Footer()
