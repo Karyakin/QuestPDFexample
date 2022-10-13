@@ -76,7 +76,7 @@ Document.Create(document =>
                             Cell()
                             .AlignCenter()
                             .Text("РЕЕСТР СДЕЛОК УЧАСТНИКА БИРЖЕВОЙ ТОРГОВЛИ")
-                            .FontSize(16)
+                            .FontSize(14)
                             .SemiBold();
                     });
                 });
@@ -147,8 +147,10 @@ Document.Create(document =>
                         .FontSize(6);
                 });
                 
-                grid.Item(10).PaddingBottom(20).Table(table =>
-                {
+                grid.Item(10)
+                    .PaddingLeft(10)
+                    .PaddingBottom(20)
+                    .Table(table => {
                     IContainer DefaultCellStyle(IContainer container, string backgroundColor)
                     {
                         return container
@@ -165,17 +167,17 @@ Document.Create(document =>
                         columns.ConstantColumn(105);
                         columns.ConstantColumn(43);
                         columns.ConstantColumn(43);
-                        columns.ConstantColumn(75);
-                        columns.ConstantColumn(75);
+                        columns.ConstantColumn(73);
+                        columns.ConstantColumn(72);
                         columns.ConstantColumn(65);
                         columns.ConstantColumn(65);
                         columns.ConstantColumn(33);
                         columns.ConstantColumn(40);
                         
-                        columns.ConstantColumn(60);
-                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(55);
+                        columns.ConstantColumn(55);
                         columns.ConstantColumn(45);
-                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(55);
                       
                         table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Биржевая сделка (регистрационный номер)");
                         table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара");
@@ -201,7 +203,7 @@ Document.Create(document =>
                     table.ColumnsDefinition(columns =>
                     {
                         columns.ConstantColumn(70);
-                        columns.ConstantColumn(105);
+                        columns.ConstantColumn(100);
                         columns.ConstantColumn(43);
                         columns.ConstantColumn(43);
                         columns.ConstantColumn(75);
@@ -210,10 +212,10 @@ Document.Create(document =>
                         columns.ConstantColumn(65);
                         columns.ConstantColumn(33);
                         columns.ConstantColumn(40);
-                        columns.ConstantColumn(60);
-                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(55);
+                        columns.ConstantColumn(55);
                         columns.ConstantColumn(45);
-                        columns.ConstantColumn(60);
+                        columns.ConstantColumn(55);
                         
                         table.Cell().Element(CellStyleForHeader).Text("1").NormalWeight();
                         table.Cell().Element(CellStyleForHeader).Text("2").NormalWeight();
@@ -270,9 +272,10 @@ Document.Create(document =>
                         
                         column.Item()
                             .AlignCenter()
-                            .Text("(Сумма прописью)")
+                            .Text("(сумма прописью)")
                             .Italic()
-                            .FontSize(6);
+                            .FontSize(6)
+                            .Light();
                     });
                     
                     grid.Item(10)
@@ -295,9 +298,10 @@ Document.Create(document =>
                         
                         column.Item()
                             .AlignCenter()
-                            .Text("(Сумма прописью)")
+                            .Text("(сумма прописью)")
                             .Italic()
-                            .FontSize(6);
+                            .FontSize(6)
+                            .Light();
                     });
                     
                     grid.Item(10)
@@ -341,9 +345,10 @@ Document.Create(document =>
                         
                         column.Item()
                             .AlignCenter()
-                            .Text("(Сумма прописью)")
+                            .Text("(сумма прописью)")
                             .Italic()
-                            .FontSize(6);
+                            .FontSize(6)
+                            .Light();
                     });
             });
 
