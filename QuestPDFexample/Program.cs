@@ -53,12 +53,14 @@ Document.Create(document =>
                     .Text(text =>
                     {
                         text.DefaultTextStyle(x => x.Light()
-                            .FontSize(10)
+                            .FontSize(9)
                             .FontColor(Colors.Black));
                         text.Span("ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО «БЕЛОРУССКАЯ УНИВЕРСАЛЬНАЯ ТОВАРНАЯ БИРЖА»");
                     });
             });
 
+        
+        
         page.Content()
             .PaddingTop(10)
             .Grid(grid =>
@@ -66,18 +68,34 @@ Document.Create(document =>
                 grid.AlignCenter();
                 grid.Columns(10); 
                 grid.Item(10)
-                    .PaddingTop(20)
-                    .PaddingBottom(20)
-                    .Table(table => {
+                    .PaddingLeft(10)
+                    .PaddingRight(600)
+                    .Text("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+                
+                grid.Item(10).PaddingTop(20).PaddingBottom(20).Table(table =>
+                {
                     table.ColumnsDefinition(columns =>
                     {
                         columns.RelativeColumn();
-                        table.
-                            Cell()
+                        columns.ConstantColumn(350);
+                        columns.RelativeColumn();
+                      
+                        table.Cell()
+                            .AlignMiddle()
+                            .PaddingLeft(100)
+                            .Text("Секция 03");
+                        
+                        table.Cell()
                             .AlignCenter()
                             .Text("РЕЕСТР СДЕЛОК УЧАСТНИКА БИРЖЕВОЙ ТОРГОВЛИ")
                             .FontSize(14)
                             .SemiBold();
+                        
+                        table.Cell()
+                            .AlignMiddle()
+                            .AlignRight()
+                            .PaddingRight(100)
+                            .Text("116768");
                     });
                 });
                 
@@ -95,7 +113,7 @@ Document.Create(document =>
                         
                     column.Item()
                         .PaddingRight(430)
-                        .PaddingBottom(20)
+                        .PaddingBottom(5)
                         .AlignCenter()
                         .Text("(полное наименование участника биржевой торговли, его местонахождение, УНП, № и дата договора на биржевое обслуживание)")
                         .Light()
@@ -117,7 +135,7 @@ Document.Create(document =>
                         
                     column.Item()
                         .PaddingRight(430)
-                        .PaddingBottom(20)
+                        .PaddingBottom(5)
                         .AlignCenter()
                         .Text("(регистрационный номер участника биржевой торговли)")
                         .Light()
@@ -129,6 +147,7 @@ Document.Create(document =>
                     .PaddingLeft(10)
                     .PaddingRight(430)
                     .Text("г.Минск, ул. Казинца 666");
+                
                 grid.Item(10).Column(column =>
                 {
                     column.Item()
@@ -139,7 +158,7 @@ Document.Create(document =>
                         
                     column.Item()
                         .PaddingRight(430)
-                        .PaddingBottom(20)
+                        .PaddingBottom(10)
                         .AlignCenter()
                         .Text("(краткое наименование обособленного подразделения и его местонахождение, УНП, регистрационный номер)")
                         .Light()
@@ -197,7 +216,55 @@ Document.Create(document =>
                         table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма НДС");
                         table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора с НДС");
                         
-                        //IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
+                        table.ColumnsDefinition(columnsDig => {
+                        columnsDig.ConstantColumn(70);
+                        columnsDig.ConstantColumn(100);
+                        columnsDig.ConstantColumn(43);
+                        columnsDig.ConstantColumn(43);
+                        columnsDig.ConstantColumn(75);
+                        columnsDig.ConstantColumn(75);
+                        columnsDig.ConstantColumn(65);
+                        columnsDig.ConstantColumn(65);
+                        columnsDig.ConstantColumn(33);
+                        columnsDig.ConstantColumn(40);
+                        columnsDig.ConstantColumn(55);
+                        columnsDig.ConstantColumn(55);
+                        columnsDig.ConstantColumn(45);
+                        columnsDig.ConstantColumn(55);
+                        
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("1").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("2").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("3").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("4").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("5").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("6").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("7").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("8").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("9").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("10").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("11").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("12").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("13").NormalWeight();
+                        table.Cell().Element(CellStyleForHeaderDigit).Text("14").NormalWeight();
+                        
+                        IContainer CellStyleForHeaderDigit(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
+                        
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("23255636565").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).Text("gggggggggggggggggggggggggggggggggggggggggggX").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("gggggggggggggggggggggg").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xggggggggggggggg").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).Text("ggggggggggggggggggggX").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).Text("Xggggggggggggg").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xgggggggggggggggg").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xggggggggggggggg").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("RUB").ExtraBold();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("1385.33").ExtraBold();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xsdc").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
+                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
+                    });
                         
                     });
                     table.ColumnsDefinition(columns =>
@@ -217,22 +284,6 @@ Document.Create(document =>
                         columns.ConstantColumn(45);
                         columns.ConstantColumn(55);
                         
-                        table.Cell().Element(CellStyleForHeader).Text("1").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("2").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("3").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("4").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("5").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("6").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("7").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("8").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("9").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("10").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("11").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("12").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("13").NormalWeight();
-                        table.Cell().Element(CellStyleForHeader).Text("14").NormalWeight();
-                        IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
-                        
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("Итог").NormalWeight();
                         table.Cell().Element(CellStyleForTable).Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
@@ -250,13 +301,6 @@ Document.Create(document =>
                         IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
                     });
                 });
-                
-                /*
-                grid.Item(10)
-                    .PaddingLeft(10)
-                    .Text("Итого участником биржевых торгов совершено 2 ( две ) сделки на сумму")
-                    .Light();
-                    */
                 
                 grid.Item(10)
                     .PaddingLeft(10)
@@ -313,7 +357,7 @@ Document.Create(document =>
                         {
                             table.ColumnsDefinition(columns =>
                             {
-                                columns.ConstantColumn(95);
+                                columns.ConstantColumn(140);
                                 columns.ConstantColumn(25);
                                 columns.RelativeColumn();
                             
@@ -338,7 +382,7 @@ Document.Create(document =>
                     grid.Item(10).Column(column =>
                     {
                         column.Item()
-                            .PaddingLeft(105)
+                            .PaddingLeft(140)
                             .PaddingRight(10)
                             .LineHorizontal(1)
                             .LineColor(Colors.Black);
