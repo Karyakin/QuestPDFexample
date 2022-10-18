@@ -1,4 +1,405 @@
-﻿
+﻿using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using QuestPDF.Previewer;
+
+
+var textStyleWithFallback = TextStyle
+    .Default
+    .FontFamily(Fonts.Calibri)
+    .SemiBold()
+    .FontSize(6)
+    .Fallback(y => y
+        .FontFamily("Microsoft YaHei")
+        .SemiBold()
+        .Underline(false)
+        .BackgroundColor(Colors.Red.Lighten4));
+
+Document.Create(document =>
+{
+    document.Page(page =>
+    {
+        page.DefaultTextStyle(textStyleWithFallback);
+        page.Size(PageSizes.A4.Landscape());
+        page.Margin(1);
+
+        page.Header()
+            .ShowOnce()
+            .PaddingTop(20)
+            .Column(column =>
+            {
+                column.Item()
+                    .AlignRight()
+                    .Row(row =>
+                    {
+                        row.ConstantItem(250)
+                            .AlignRight()
+                            .PaddingRight(10)
+                            .Text("Приложение № 1")
+                            .FontSize(10)
+                            .FontFamily(Fonts.Calibri)
+                            .NormalWeight();
+                    });
+                column.Item()
+                    .AlignRight()
+                    .Row(row =>
+                    {
+                        row.ConstantItem(250)
+                            .AlignRight()
+                            .PaddingTop(-4)
+                            .PaddingRight(10)
+                            .Text("к Публичному договору на биржевое обслуживание")
+                            .FontSize(10)
+                            .FontFamily(Fonts.Calibri)
+                            .NormalWeight();
+                    });
+            });
+
+
+        page.Content()
+            .PaddingTop(10)
+            .Grid(grid =>
+            {
+                grid.AlignLeft();
+                grid.Columns(10);
+                grid.Item(3)
+                    .PaddingLeft(10)
+                    .Text("Дата фиксации сделки – <dd.mm.yyyy>")
+                    .FontSize(10)
+                    .FontFamily(Fonts.Calibri)
+                    .NormalWeight();
+
+
+                grid.Item(10)
+                    .PaddingLeft(10)
+                    .PaddingRight(10)
+                    .PaddingBottom(20)
+                    .Table(table =>
+                    {
+                        IContainer DefaultCellStyle(IContainer container)
+                        {
+                            return container
+                                .Border(1)
+                                .BorderColor(Colors.Grey.Lighten1)
+                                .PaddingHorizontal(1)
+                                .AlignCenter()
+                                .AlignMiddle();
+                        }
+
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(70);
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(43);
+                            columns.ConstantColumn(43);
+                            columns.ConstantColumn(70);
+                            columns.ConstantColumn(72);
+                            columns.ConstantColumn(65);
+                            columns.ConstantColumn(65);
+                            columns.ConstantColumn(35);
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(55);
+                            columns.ConstantColumn(100);
+
+
+                            /*1*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Регистрационный номер сделки").NormalWeight();
+                            /*2*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара").NormalWeight();
+                            /*3*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Количество").NormalWeight();
+                            /*4*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Ед.изм").NormalWeight();
+                            /*5*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Цена (без НДС)").NormalWeight();
+                            /*6*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Валюта").NormalWeight();
+                            /*7*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Ставка НДС(%)").NormalWeight();
+                            /*8*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Стоимость\n (с учетом НДС)").NormalWeight();
+                            /*9*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма НДС)").NormalWeight();
+                            /*10*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Способ доставки").NormalWeight();
+                            /*11*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Срок доставки").NormalWeight();
+                            /*11*/ table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия оплаты").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                            
+                        });
+                        
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(70);
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(43);
+                            columns.ConstantColumn(43);
+                            columns.ConstantColumn(70);
+                            columns.ConstantColumn(72);
+                            columns.ConstantColumn(65);
+                            columns.ConstantColumn(65);
+                            columns.ConstantColumn(35);
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(55);
+                            columns.ConstantColumn(100);
+
+
+                            /*1*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*2*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*3*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*4*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*5*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*6*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*7*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*8*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*9*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*10*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*11*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            /*11*/ table.Cell().Element(CellStyleForTable).ExtendHorizontal().AlignLeft().AlignCenter().Text($"?").NormalWeight();
+                            
+                            IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container).ShowOnce();
+
+                        });
+                        
+                    });
+
+
+                grid.Item(10)
+                    .Element(CellStyleForTextContent)
+                    .Text(text =>
+                    {
+                        text.Span("Описание товара: ");
+                        text.Span("?????????????????????????????????")
+                            .Italic();
+                    });
+
+                grid.Item(10)
+                    .Element(CellStyleForTextContent)
+                    .Text(text =>
+                    {
+                        text.Span("Адрес доставки/Адрес пункта выдачи/Местонахождение товара: ");
+                        text.Span("?????????????????????????????????")
+                            .Italic();
+                    });
+                
+                grid.Item(10)
+                    .Element(CellStyleForTextContent)
+                    .Text(text =>
+                    {
+                        text.Span("Дополнительная информация: ");
+                        text.Span("?????????????????????????????????")
+                            .Italic();
+                    });
+                IContainer DefaultCellStyleText(IContainer container)
+                {
+                    return container
+                        .PaddingLeft(10)
+                        .AlignMiddle();
+                }
+                IContainer CellStyleForTextContent(IContainer container) => DefaultCellStyleText(container).ShowOnce();
+                
+                grid.Item(1)
+                    .PaddingTop(20)
+                    .PaddingLeft(10)
+                    .Text("По сделке")
+                    .FontFamily(Fonts.Calibri)
+                    .NormalWeight()
+                    .Italic();
+                
+               grid.Item(10)
+                    .PaddingLeft(10)
+                    .PaddingRight(10)
+                    .PaddingBottom(20)
+                    .Table(table =>
+                    {
+                        IContainer DefaultCellStyle(IContainer container)
+                        {
+                            return container
+                                .Border(1)
+                                .BorderColor(Colors.Grey.Lighten1)
+                                .PaddingHorizontal(1)
+                                .AlignCenter()
+                                .AlignMiddle();
+                        }
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(300);
+                            columns.ConstantColumn(420);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("ИТОГО:").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("????");
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("????");
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(300);
+                            columns.ConstantColumn(420);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Общая стоимость с НДС").NormalWeight().Italic();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Общая стоимость с НДС прописью").NormalWeight().Italic();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(300);
+                            columns.ConstantColumn(420);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("?????");
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("?????");
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(100);
+                            columns.ConstantColumn(300);
+                            columns.ConstantColumn(420);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Ставка НДС").NormalWeight().Italic();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма НДС прописью").NormalWeight().Italic();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                    });
+               grid.Item(10)
+                   .Element(CellStyleForTextContent)
+                   .Text(text =>
+                   {
+                       text.Span("Срок действия настоящей спецификации истекает $DATE_EXPIRE ").NormalWeight();
+                       text.Span("(включает контрольный срок для совершения оплаты).")
+                           .Italic()
+                           .NormalWeight();
+                   });
+                
+               
+                grid.Item(10)
+                    .PaddingTop(20)
+                    .PaddingLeft(10)
+                    .PaddingRight(10)
+                    .PaddingBottom(20)
+                    .Table(table =>
+                    {
+                        IContainer DefaultCellStyle(IContainer container)
+                        {
+                            return container
+                                //.Border(1)
+                                .BorderColor(Colors.Grey.Lighten1)
+                                .PaddingHorizontal(1)
+                                .AlignCenter()
+                                .AlignMiddle();
+                        }
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+                            
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("ПРОДАВЕЦ").Bold().FontSize(10);
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("ПОКУПАТЕЛЬ").FontSize(10);
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("$SELLER_FIRM_NAME or $SELLER_CLIENT_NAME").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("$BUYER_FULL_NAME ").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("Юридический адрес: ").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("Место жительства и (или) место пребывания: ").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("$SELLER_ADDRESS").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("$BUYER_ADDRESS_RESIDENCE").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("УНП: $SELLER_TAX_NUMBER").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("Тел.: $BUYER_TELEPHONE").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+                            
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("Расчетный счет: $SELLER_BANK_ACCOUNTS").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("e-mail: $BUYER_MAIL").NormalWeight();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+                            
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("Тел.: $SELLER_TELEPHONE").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(330);
+                            columns.ConstantColumn(150);
+                            columns.ConstantColumn(330);
+                            
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().Text("e-mail: $SELLER_MAIL").NormalWeight();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            table.Cell().Element(CellStyleForHeader).ExtendHorizontal();
+                            IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container);
+                        });
+                    });
+               
+               
+               
+               
+            });
+        
+        
+
+        page.Footer()
+            .Height(1, Unit.Centimetre)
+            .AlignRight()
+            .PaddingRight(10)
+            .AlignMiddle()
+            .Text(text =>
+            {
+                text.DefaultTextStyle(x => x.FontSize(6));
+                text.Span("Страница: ");
+                text.CurrentPageNumber().FontSize(6);
+                text.Span(" из ");
+                text.TotalPages().FontSize(6);
+            });
+    });
+}).ShowInPreviewer();
+
+
+#region DealsRegisterPdf
+
+/*using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -22,20 +423,22 @@ var pageContent = new List<(string o1, string o2, string o3, string o4, string o
     ("03/19092022-001", "Заменитель молочного жира Эколакт. Код ТНВЭД - 1517909900. Код ОКРБ 007-2012 - ", "кг", "5","Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "Оплата за согласованную партию товара в течение 5 банковских дней с момента поставки", "ООО усметпром", "ООО усметпром", "rub","489","489","489","489","489"),          
     
 };
-
 var textStyleWithFallback = TextStyle
     .Default
     .FontFamily(Fonts.Calibri)
     .SemiBold()
-    .FontSize(8)
-        .Fallback(y => y
-            .FontFamily("Microsoft YaHei")
-            .SemiBold()
-            .Underline(false)
-            .BackgroundColor(Colors.Red.Lighten4));
+    .FontSize(6)
+    .Fallback(y => y
+        .FontFamily("Microsoft YaHei")
+        .SemiBold()
+        .Underline(false)
+        .BackgroundColor(Colors.Red.Lighten4));
+
 
 Document.Create(document =>
 {
+    //DocumentMetadata.Default.ImageQuality = 50;
+
     document.Page(page =>
     {
         page.DefaultTextStyle(textStyleWithFallback);
@@ -70,7 +473,8 @@ Document.Create(document =>
                 grid.Item(10)
                     .PaddingLeft(10)
                     .PaddingRight(600)
-                    .Text("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+                    .Text("Получатель: ОАО «Белорусская универсальная товарная биржа», УНП 190542056\r\nСчет №: BY23AKBB30120000059140000000, банк получателя: ОАО «АСБ Беларусбанк», пр. Дзержинского, 18, БИК AKBBBY2X")
+                    .NormalWeight();
                 
                 grid.Item(10).PaddingTop(20).PaddingBottom(20).Table(table =>
                 {
@@ -83,7 +487,8 @@ Document.Create(document =>
                         table.Cell()
                             .AlignMiddle()
                             .PaddingLeft(100)
-                            .Text("Секция 03");
+                            .Text("Секция 03")
+                            .FontSize(9);
                         
                         table.Cell()
                             .AlignCenter()
@@ -95,14 +500,15 @@ Document.Create(document =>
                             .AlignMiddle()
                             .AlignRight()
                             .PaddingRight(100)
-                            .Text("116768");
+                            .Text("116768")
+                            .FontSize(9);
                     });
                 });
                 
                 grid.Item(10)
                     .PaddingLeft(10)
                     .PaddingRight(430)
-                    .Text("ООО \"АВАБИ\". Адрес РЕСПУБЛИКА БЕЛАРУСЬ, 220005, г. Минск, ул. Платонова дом 20Б корпус 3 квартира/офис 148. УНП (ЕГРН) 100172248. Договор на биржевое обслуживание биржевого брокера №454 от 10.12.2021, Договор на биржевое обслуживание посетителя торгов №401 от 01.09.2021");
+                    .Text("Тестовый биржевой брокер. РЕСПУБЛИКА БЕЛАРУСЬ, 220005, г. Минск, ул. Платонова дом 20Б корпус 3 квартира/офис 148. 100172248. Договор на биржевое обслуживание биржевого брокера №454 от 10.12.2021, Договор на биржевое обслуживание посетителя торгов №401 от 01.09.2021");
                 grid.Item(10).Column(column =>
                 {
                     column.Item()
@@ -170,12 +576,12 @@ Document.Create(document =>
                     .PaddingLeft(10)
                     .PaddingBottom(20)
                     .Table(table => {
-                    IContainer DefaultCellStyle(IContainer container, string backgroundColor)
+                    IContainer DefaultCellStyle(IContainer container/*, string backgroundColor)
                     {
                         return container
                             .Border(1)
                             .BorderColor(Colors.Grey.Lighten1)
-                            .Background(backgroundColor)
+                            //.Background(backgroundColor)
                             .PaddingHorizontal(1)
                             .AlignCenter()
                             .AlignMiddle();
@@ -198,23 +604,23 @@ Document.Create(document =>
                         columns.ConstantColumn(45);
                         columns.ConstantColumn(55);
                       
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Биржевая сделка (регистрационный номер)");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Единица измерения");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Количество товара");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия оплаты");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия поставки");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Продавец");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Покупатель");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Валюта платежа");
-                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма биржевой сделки\n(с учетом НДС)");
-                        IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Биржевая сделка (регистрационный номер)").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Наименование товара").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Единица измерения").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Количество товара").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия оплаты").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Условия поставки").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Продавец").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Покупатель").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Валюта платежа").NormalWeight();
+                        table.Cell().RowSpan(2).Element(CellStyleForHeader).ExtendHorizontal().AlignLeft().AlignCenter().Text("Сумма биржевой сделки\n(с учетом НДС)").NormalWeight();
+                        IContainer CellStyleForHeader(IContainer container) => DefaultCellStyle(container/*, Colors.Grey.Lighten3);
                       
-                        table.Cell().ColumnSpan(4).Element(CellStyleForHeader).AlignCenter().Text("Плата за организацию и проведение биржевых торгов\n (биржевой сбор)");
-                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Ставка биржевого сбора, %");
-                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора без НДС");
-                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма НДС");
-                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора с НДС");
+                        table.Cell().ColumnSpan(4).Element(CellStyleForHeader).AlignCenter().Text("Плата за организацию и проведение биржевых торгов\n (биржевой сбор)").NormalWeight();
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Ставка биржевого сбора, %").NormalWeight();
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора без НДС").NormalWeight();
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма НДС").NormalWeight();
+                        table.Cell().Element(CellStyleForHeader).AlignCenter().Text("Сумма биржевого сбора с НДС").NormalWeight();
                         
                         table.ColumnsDefinition(columnsDig => {
                         columnsDig.ConstantColumn(70);
@@ -247,13 +653,13 @@ Document.Create(document =>
                         table.Cell().Element(CellStyleForHeaderDigit).Text("13").NormalWeight();
                         table.Cell().Element(CellStyleForHeaderDigit).Text("14").NormalWeight();
                         
-                        IContainer CellStyleForHeaderDigit(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3);
+                        IContainer CellStyleForHeaderDigit(IContainer container) => DefaultCellStyle(container/*, Colors.Grey.Lighten3);
                         
-                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("23255636565").NormalWeight();
-                        table.Cell().Element(CellStyleForTable).Text("gggggggggggggggggggggggggggggggggggggggggggX").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("02.11102022.000058").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).Text("Балансы лиственных пород, Еденица измерения куб.м, Порода Липа, Сертификат FSC,PEFS, Сорт 1,2,3, Стандарт СТБ 1667-2012, Стандарт определения качества СТБ 1712-2007, Стандартизированное значение длины 0,75 и кратн. до 6,0, Стандартизированный диаметр 6-24, ТН ВЭД ЕАЭС 4403").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("gggggggggggggggggggggg").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xggggggggggggggg").NormalWeight();
-                        table.Cell().Element(CellStyleForTable).Text("ggggggggggggggggggggX").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).Text("100% предоплаты на счет биржи в течение 3 банковских дней с момента получения уведомления об акцепте/принятии оферты").NormalWeight();
                         table.Cell().Element(CellStyleForTable).Text("Xggggggggggggg").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xgggggggggggggggg").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("Xggggggggggggggg").NormalWeight();
@@ -263,7 +669,7 @@ Document.Create(document =>
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
-                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
+                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container/*, Colors.White).ShowOnce();
                     });
                         
                     });
@@ -284,7 +690,7 @@ Document.Create(document =>
                         columns.ConstantColumn(45);
                         columns.ConstantColumn(55);
                         
-                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Итог").NormalWeight();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("Итого").NormalWeight();
                         table.Cell().Element(CellStyleForTable).Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
@@ -293,12 +699,12 @@ Document.Create(document =>
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("RUB").ExtraBold();
-                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("1385.33").ExtraBold();
+                        table.Cell().Element(CellStyleForTable).ShowEntire().Text("183 000,00").ExtraBold();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("X").NormalWeight();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
                         table.Cell().Element(CellStyleForTable).ShowEntire().Text("0,11 BYN").ExtraBold();
-                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce();
+                        IContainer CellStyleForTable(IContainer container) => DefaultCellStyle(container/*, Colors.White).ShowOnce();
                     });
                 });
                 
@@ -410,7 +816,9 @@ Document.Create(document =>
                 text.TotalPages().FontSize(6);
             });
     });
-}).ShowInPreviewer();
+}).ShowInPreviewer();*/
+
+#endregion
 
 #region full packige
 
